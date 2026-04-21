@@ -1,0 +1,23 @@
+/* TRE-PI Institutional Colors */
+:root {
+  /* Cores principais */
+  --dark-blue: #0C326F;        /* Header, rodapé, títulos */
+  --primary-blue: #1351B4;     /* Botão principal, bolha usuário */
+  --flag-yellow: #FFCD07;      /* CTA, divisória, sublinhado links */
+  --urn-green: #1D9E75;        /* URLs em monospace */
+
+  /* Cores secundárias */
+  --light-blue-text: #B5D4F4;  /* Texto secundário header */
+  --pale-blue-bg: #E6F1FB;     /* Chips de sugestão */
+
+  /* Backgrounds */
+  --chat-bg: #F7F7F5;          /* Área de rolagem */
+  --card-bg: #FFFFFF;          /* Cards e input */
+
+  /* Textos */
+  --text-main: #1F2329;        /* Texto principal */
+  --text-secondary: #5F5E5A;   /* Metadados */
+
+  /* Bordas */
+  --border-subtle: #D3D1C7;
+}

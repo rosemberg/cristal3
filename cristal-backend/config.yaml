@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+mcp:
+  data_orchestrator:
+    command: python3
+    args: ["-m", "src.server"]
+    working_dir: ../data-orchestrator-mcp
+    timeout: 120s
+
+  site_research:
+    command: ../cmd/site-research-mcp/site-research-mcp
+    args: []
+    env:
+      SITE_RESEARCH_CATALOG: ../data/catalog.json
+      SITE_RESEARCH_FTS_DB: ../data/catalog.sqlite
+      SITE_RESEARCH_DATA_DIR: ../data
+      SITE_RESEARCH_SCOPE_PREFIX: https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas
+      SITE_RESEARCH_LOG_LEVEL: info
+    timeout: 30s
+
+llm:
+  provider: vertex          # anthropic | vertex
+  max_tokens: 4096
+  temperature: 0.7
+  timeout: 60s
+
+anthropic:
+  model: claude-sonnet-4-5-20250120
+
+vertex:
+  project_id: estudo-vertex-ai
+  location: global          # or a region like us-central1
+  model: gemini-3-flash-preview
+  # credentials_file: /path/to/service-account.json   # optional; defaults to ADC

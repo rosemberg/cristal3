@@ -1,0 +1,46 @@
+scope:
+  seed_url: "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas"
+  prefix:   "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas"
+
+sitemap:
+  url: "https://www.tre-pi.jus.br/sitemap.xml.gz"
+
+crawler:
+  user_agent: "TRE-PI-Research-Crawler/0.1 (+contact: cotdi@tre-pi.jus.br)"
+  rate_limit_per_second: 1.0
+  jitter_ms: 200                        # ±ms aleatórios sobre o intervalo do rate limit
+  request_timeout_seconds: 30
+  max_retries: 3
+  respect_robots_txt: true
+  honor_retry_after: true               # 429/503 com Retry-After sobrescrevem backoff
+
+  circuit_breaker:
+    max_consecutive_failures: 5         # abre o breaker após N falhas seguidas
+    pause_minutes: 10                   # duração da pausa quando abre
+    abort_threshold: 3                  # falhas consecutivas pós-retorno que disparam abort
+
+  suspicious_response:
+    min_body_bytes: 500                 # body menor que isto + histórico com conteúdo ⇒ suspeita
+    block_title_patterns:
+      - "Access Denied"
+      - "Forbidden"
+      - "Captcha"
+      - "Cloudflare"
+      - "Just a moment"
+
+storage:
+  data_dir:     "./data"
+  catalog_path: "./data/catalog.json"
+  sqlite_path:  "./data/catalog.sqlite"
+
+llm:
+  provider:    "anthropic"              # anthropic | gemini | openai_compat
+  model:       "claude-haiku-4-5"
+  endpoint:    "https://api.anthropic.com"
+  api_key_env: "ANTHROPIC_API_KEY"
+  concurrency: 3
+  request_timeout_seconds: 60
+
+recrawl:
+  stale_retention_days: 30
+  force_resummarize:    false

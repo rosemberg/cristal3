@@ -1,0 +1,36 @@
+# Build artifacts
+/bin/
+/dist/
+/tmp/
+
+# Test / coverage
+/coverage/
+coverage.out
+coverage.html
+*.test
+*.out
+
+# Crawler output (fonte de verdade não versionada)
+/data/
+
+# SQLite / FTS gerados
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.db
+
+# Segredos — nunca versionar
+.env
+.env.*
+
+# OS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+
+# Claude Code local settings
+.claude/settings.local.json

@@ -1,0 +1,21 @@
+mcp:
+  site_research_url: "stdio"  # ou URL se remoto
+
+cache:
+  directory: "./cache"
+  ttl_queries: 86400
+  ttl_documents: 604800
+
+extraction:
+  pdf:
+    engine: "pypdf"
+  spreadsheet:
+    engine: "polars"
+
+http:
+  timeout: 30
+  max_retries: 3
+
+logging:
+  level: "INFO"
+  format: "json"

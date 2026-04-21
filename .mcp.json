@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "data-orchestrator": {
+      "command": "/Users/rosemberg/projetos-gemini/cristal3/data-orchestrator-mcp/venv/bin/python",
+      "args": ["-m", "src.server"],
+      "cwd": "/Users/rosemberg/projetos-gemini/cristal3/data-orchestrator-mcp"
+    }
+  }
+}

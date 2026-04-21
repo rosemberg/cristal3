@@ -1,0 +1,142 @@
+FASE 6: INTEGRAÇÃO COM BACKEND E ESTADOS - RESUMO
+=================================================
+
+✅ IMPLEMENTAÇÃO COMPLETA
+
+ARQUIVOS CRIADOS:
+-----------------
+
+1. src/api/client.ts
+   - Cliente HTTP para comunicação com backend
+   - Endpoints: POST /api/chat, GET /api/health
+   - Timeout de 30s, error handling, suporte a .env
+
+2. src/api/index.ts
+   - Barrel export do API client
+
+3. src/store/chatStore.ts
+   - Zustand store global
+   - Estado: messages, citations, isLoading, error
+   - Ações: addMessage, addCitations, clearChat, setLoading, setError
+   - Estado inicial VAZIO (messages: [])
+
+4. src/hooks/useSendMessage.ts
+   - TanStack Query mutation hook
+   - Gerencia envio de mensagens via API
+   - Flow: onMutate → onSuccess → onError
+
+5. src/hooks/useAutoScroll.ts
+   - Hook para auto-scroll suave
+   - Scroll para última mensagem automaticamente
+
+6. src/hooks/index.ts
+   - Barrel export dos hooks
+
+7. .env.example
+   - Template de variáveis de ambiente
+   - VITE_API_BASE_URL=http://localhost:8080
+
+8. FASE6-INTEGRATION.md
+   - Documentação completa da fase 6
+   - Guia de uso, estrutura, exemplos
+
+ARQUIVOS MODIFICADOS:
+--------------------
+
+1. src/App.tsx
+   - Integração com Zustand store
+   - Integração com TanStack Query (QueryClientProvider)
+   - Hook useSendMessage
+   - Error banner
+   - Remoção de mock data
+
+2. src/types/chat.ts
+   - Remoção de citations do Message
+   - Atualização de ChatResponse (response + citations)
+   - Interface simplificada
+
+3. src/components/chat/ChatArea.tsx
+   - Integração com useChatStore para citations
+   - Passa citations globais para MessageTurn
+
+4. src/components/chat/MessageTurn.tsx
+   - Recebe citations via props
+   - Passa citations para AssistantMessage
+
+5. src/components/chat/LoadingDots.tsx
+   - Atualização para usar animate-pulse-dot
+   - Layout flex-col com gap-2
+
+6. src/styles/animations.css
+   - Keyframe pulse-dot
+   - Classe animate-pulse-dot
+
+7. vite.config.ts
+   - Proxy /api para backend
+   - Simplificação (removido /chat e /health separados)
+
+8. src/data/mockMessages.ts
+   - Remoção de citations do último message
+
+ESTRUTURA FINAL:
+---------------
+
+src/
+├── api/                    # API client e exports
+├── store/                  # Zustand store global
+├── hooks/                  # Custom hooks (useSendMessage, useAutoScroll)
+├── components/             # Componentes React
+├── types/                  # TypeScript interfaces
+├── styles/                 # CSS e animações
+└── App.tsx                 # App principal integrado
+
+FLUXO DE DADOS:
+--------------
+
+1. User digita mensagem → Composer.onSendMessage
+2. App.handleSendMessage → useSendMessage.mutate()
+3. useSendMessage:
+   - onMutate: adiciona mensagem user (chatStore.addMessage)
+   - setLoading(true)
+   - apiClient.sendMessage() → POST /api/chat
+   - onSuccess: adiciona resposta assistant + citations
+   - setLoading(false)
+4. ChatArea renderiza messages + LoadingDots (se loading)
+5. Auto-scroll para última mensagem
+
+TECNOLOGIAS:
+-----------
+
+- Zustand 5.0.12           → Estado global
+- TanStack Query 5.99.2    → Mutations e queries
+- UUID 14.0.0              → IDs únicos
+- Fetch API                → HTTP requests
+- TypeScript 6.0.2         → Type safety
+
+PRÓXIMOS PASSOS:
+---------------
+
+Para iniciar o projeto:
+
+1. Criar arquivo .env (copiar de .env.example)
+2. Garantir backend rodando em http://localhost:8080
+3. npm install
+4. npm run dev
+
+Backend deve ter endpoints:
+- POST /api/chat (body: { message: string })
+  Response: { response: string, citations?: Citation[] }
+- GET /api/health
+  Response: { status: string }
+
+OBSERVAÇÕES:
+-----------
+
+✅ Estado inicial vazio (WelcomeCard visível)
+✅ Citações armazenadas globalmente no store
+✅ Error handling com banner
+✅ Loading state desabilita Composer
+✅ Auto-scroll suave
+✅ TypeScript compilando sem erros
+✅ Build produção OK (530KB bundle)
+

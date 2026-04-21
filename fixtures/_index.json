@@ -1,0 +1,852 @@
+{
+  "$schema": "page-node-v1",
+  "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas",
+  "title": "Transparência e Prestação de Contas — Tribunal Regional Eleitoral do Piauí",
+  "description": "Transparência e Prestação de Contas",
+  "category": "",
+  "subcategory": "",
+  "breadcrumb": [
+    {
+      "title": "Página inicial",
+      "url": "https://www.tre-pi.jus.br"
+    }
+  ],
+  "content": {
+    "summary": "Transparência e prestação de contas\nToggle navigation\nAudiências Públicas e Sessões\nAuditoria\nColegiados\nContabilidade\nGestão\nGestão de Pessoas\nGestão Orçamentária e Financeira\nGestão Patrimonial e Infraestrutura\nLei de Acesso à Informação\nLGPD - Lei Geral de Proteção de Dados\nLicitações, Contratos e Instrumentos de Cooperação\nOuvidoria\nPrestação de Contas da Gestão\nServiço de Informações ao Cidadão - SIC\nSustentabilidade, Acessibilidade e Inclusão\nTecnologia da Info",
+    "full_text": "Transparência e prestação de contas\nToggle navigation\nAudiências Públicas e Sessões\nAuditoria\nColegiados\nContabilidade\nGestão\nGestão de Pessoas\nGestão Orçamentária e Financeira\nGestão Patrimonial e Infraestrutura\nLei de Acesso à Informação\nLGPD - Lei Geral de Proteção de Dados\nLicitações, Contratos e Instrumentos de Cooperação\nOuvidoria\nPrestação de Contas da Gestão\nServiço de Informações ao Cidadão - SIC\nSustentabilidade, Acessibilidade e Inclusão\nTecnologia da Informação e Comunicação\nTransparência CNJ\nPerguntas Frequentes\nTags\n#Transparência e Prestação de Contas\nGestor responsável\nDiretoria Geral\nTransparência e Prestação de ContasTransparência e Prestação de Contashttps://www.tre-pi.jus.br/transparencia-e-prestacao-de-contashttps://www.tre-pi.jus.br/@@site-logo/logo.jpg\nTransparência e Prestação de Contas\nCompartilhar página via e-mailCompartilhar pagina via FacebookCompartilhar pagina via WhatsApp\nItens Transparência CNJ 2026\nA Lei de Acesso à Informação - Lei nº 12.527/2011 garante ao cidadão brasileiro o acesso às informações públicas sob guarda de órgãos e entidades públicas facilitando, dessa forma, uma maior participação popular no acompanhamento e fiscalização das ações governamentais.\nDesse modo, o TRE/PI disponibiliza nesta página as informações públicas produzidas pelo órgão, orientando àqueles que porventura não tenham sua necessidade atendida por esse canal que acessem a página da Ouvidoria Eleitoral, por meio da qual poderão registrar pedido formal de acesso à informação.\nFALE COM A OUVIDORIA"
+  },
+  "metadata": {
+    "depth": 262,
+    "extracted_at": "2026-04-11T21:18:52-03:00",
+    "last_modified": "",
+    "http_status": 200,
+    "content_type": "page",
+    "parent_url": ""
+  },
+  "links": {
+    "children": [
+      {
+        "title": "Contabilidade",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/contabilidade",
+        "local_path": "contabilidade/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Perguntas Frequentes",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/perguntas-frequentes",
+        "local_path": "perguntas-frequentes/_index.json",
+        "type": "unknown"
+      }
+    ],
+    "internal": [
+      {
+        "title": "Transparência e prestação de contas",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas",
+        "local_path": "_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Núcleo de Cooperação Judiciária",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/colegiados/outros-colegiados/nucleo-de-cooperacao-judiciaria-1/nucleo-de-cooperacao-judiciaria",
+        "local_path": "colegiados/outros-colegiados/nucleo-de-cooperacao-judiciaria-1/nucleo-de-cooperacao-judiciaria/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "LGPD - Lei Geral de Proteção de Dados",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/lgpd-lei-geral-de-protecao-de-dados/lgpd-lei-geral-de-protecao-de-dados-1",
+        "local_path": "lgpd-lei-geral-de-protecao-de-dados/lgpd-lei-geral-de-protecao-de-dados-1/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Audiências Públicas e Sessões",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/audiencias-publicas/audiencias-e-sessoes",
+        "local_path": "audiencias-publicas/audiencias-e-sessoes/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Auditoria",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/planos-de-auditoria-interna/planos-de-auditoria-interna",
+        "local_path": "planos-de-auditoria-interna/planos-de-auditoria-interna/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Colegiados",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/colegiados/colegiados",
+        "local_path": "colegiados/colegiados/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Gestão",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/governanca/gestao-e-governanca",
+        "local_path": "governanca/gestao-e-governanca/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Gestão de Pessoas",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/gestao-de-pessoas/gestao-de-pessoas",
+        "local_path": "gestao-de-pessoas/gestao-de-pessoas/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Gestão Orçamentária e Financeira",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/gestao-orcamentaria-e-financeira/copy5_of_relatorios-do-conselho-nacional-de-justica-cnj",
+        "local_path": "gestao-orcamentaria-e-financeira/copy5_of_relatorios-do-conselho-nacional-de-justica-cnj/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Gestão Patrimonial e Infraestrutura",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/gestao-patrimonial-e-infraestrutura/capa-gestao-patrimonial-e-infraestrutura",
+        "local_path": "gestao-patrimonial-e-infraestrutura/capa-gestao-patrimonial-e-infraestrutura/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Lei de Acesso à Informação",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/lei-de-acesso-a-informacao-declaracao-anual/lei-de-acesso-a-informacao-declaracao-anual",
+        "local_path": "lei-de-acesso-a-informacao-declaracao-anual/lei-de-acesso-a-informacao-declaracao-anual/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Licitações, Contratos e Instrumentos de Cooperação",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/licitacoes-e-contratos/licitacoes-e-contratos",
+        "local_path": "licitacoes-e-contratos/licitacoes-e-contratos/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Ouvidoria",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/ouvidoria/ouvidoria-1",
+        "local_path": "ouvidoria/ouvidoria-1/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Prestação de Contas da Gestão",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/prestacao-de-constas-da-gestao/prestacao-de-constas-da-gestao",
+        "local_path": "prestacao-de-constas-da-gestao/prestacao-de-constas-da-gestao/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Serviço de Informações ao Cidadão - SIC",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/servico-de-informacoes-ao-cidadao-sic/servico-de-informacao-ao-cidadao-sic",
+        "local_path": "servico-de-informacoes-ao-cidadao-sic/servico-de-informacao-ao-cidadao-sic/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Sustentabilidade, Acessibilidade e Inclusão",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/sustentabililidade_acessibilidade_inclusao/socioambiental",
+        "local_path": "sustentabililidade_acessibilidade_inclusao/socioambiental/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Tecnologia da Informação e Comunicação",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/tecnologia-da-informacao-e-comunicacao-1/tecnologia-da-informacao-e-comunicacao",
+        "local_path": "tecnologia-da-informacao-e-comunicacao-1/tecnologia-da-informacao-e-comunicacao/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Transparência CNJ",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/transparencia-cnj/transparencia-cnj-principal",
+        "local_path": "transparencia-cnj/transparencia-cnj-principal/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/estatistica-processual/estatistica-processual",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/estatistica-processual/estatistica-processual",
+        "local_path": "estatistica-processual/estatistica-processual/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Itens Transparência CNJ 2026",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/transparencia-cnj/transparencia-cnj-2026",
+        "local_path": "transparencia-cnj/transparencia-cnj-2026/_index.json",
+        "type": "unknown"
+      },
+      {
+        "title": "Termos de uso e privacidade",
+        "url": "https://www.tre-pi.jus.br/transparencia-e-prestacao-de-contas/lgpd-lei-geral-de-protecao-de-dados/aviso-de-privacidade",
+        "local_path": "lgpd-lei-geral-de-protecao-de-dados/aviso-de-privacidade/_index.json",
+        "type": "unknown"
+      }
+    ],
+    "external": [
+      {
+        "title": "Busca avançada [5]",
+        "url": "https://www.tre-pi.jus.br/@@advanced-search",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Página inicial [6]",
+        "url": "https://www.tre-pi.jus.br",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Página de acessibilidade [7]",
+        "url": "https://www.tre-pi.jus.br/acessibilidades-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Ouvidoria",
+        "url": "https://www.tre-pi.jus.br/o-tre/ouvidoria/index",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Link:\n        Acesso à informação",
+        "url": "https://www.tre-pi.jus.br/institucional/ouvidoria/servico-de-informacao-ao-cidadao/servico-de-informacao-ao-cidadao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Atendimento ao Eleitor",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/Atendimento-ao-Eleitor",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Agendar Atendimento",
+        "url": "https://servicos.tre-pi.jus.br/agendamento",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Biometria",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/biometria-1",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Carta de Serviços",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/carta-de-servicos/carta-de-servicos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Certidões",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/certidoes/certidoes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Certidão Emergencial",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/certidoes/arquivos/certidao-emergencial",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Consulta situação eleitoral",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/consulta-situacao-eleitoral-1",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleitor no exterior",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/eleitor-no-exterior",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "e-Título",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/e-titulo",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Glossário Eleitoral",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/glossario-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Justificativa eleitoral",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/justificativa-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Mesária e Mesário",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/mesario/mesario",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Pré-atendimento ao Eleitor - Título Net",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/pre-atendimento-eleitoral-titulo-net-1/requerimento-titulo-net-1",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Restituição de multas",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/restituicao-de-multas",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Serviço de Informação ao Cidadão - SIC",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/servico-de-informacao-ao-cidadao-sic",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Situação eleitoral",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/situacao-eleitoral/consulta-por-nome",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Título e local de votação",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais/titulo-e-local-de-votacao/consulta-por-nome",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Serviços eleitorais",
+        "url": "https://www.tre-pi.jus.br/servicos-eleitorais",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Contas Eleitorais",
+        "url": "https://www.tre-pi.jus.br/eleicoes/contas-eleitorais/prestacao-de-contas-eleicoes-2012",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleições Conselhos Tutelares",
+        "url": "https://www.tre-pi.jus.br/eleicoes/eleicoes-nao-oficiais/conselhos-tutelares/conselhos-tutelares",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Estatísticas",
+        "url": "https://www.tre-pi.jus.br/eleicoes/estatistica/estatistica",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleições 2026",
+        "url": "https://www.tre-pi.jus.br/eleicoes/eleicoes-2026/eleicoes-2026",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleições Anteriores",
+        "url": "https://www.tre-pi.jus.br/eleicoes/eleicoes-anteriores/eleicoes-anteriores",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleições Comunitárias",
+        "url": "https://www.tre-pi.jus.br/eleicoes/eleicoes-nao-oficiais/eleicoes-nao-oficiais",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Eleicões Suplementares",
+        "url": "https://www.tre-pi.jus.br/eleicoes/eleicoes-suplementares/eleicoes-suplementares",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Consultas Plebiscitárias",
+        "url": "https://www.tre-pi.jus.br/eleicoes/consultas-plebiscitarias/consultas-plebiscitarias",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Histórico de Orçamentos das Eleições",
+        "url": "https://www.tre-pi.jus.br/eleicoes/historico-de-orcamentos-das-eleicoes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Sistema de Candidaturas - CANDex",
+        "url": "https://www.tse.jus.br/eleicoes/eleicoes-2024-content/sistema-de-candidaturas-modulo-externo-candex-2024",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Eleições",
+        "url": "https://www.tre-pi.jus.br/eleicoes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Contas partidárias",
+        "url": "https://www.tre-pi.jus.br/partidos/contas-partidarias/contas-partidarias",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Filiação partidária",
+        "url": "https://www.tre-pi.jus.br/partidos/filiacao-partidaria/filiaweb",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Fundo partidário",
+        "url": "https://www.tre-pi.jus.br/partidos/fundo-partidario/recursos-do-fundo-partidario",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Partidos políticos",
+        "url": "https://www.tre-pi.jus.br/partidos/partidos-politicos/relacao-de-orgaos-partidarios",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Propaganda Partidária",
+        "url": "https://www.tre-pi.jus.br/partidos/propaganda-partidaria-1",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Partidos",
+        "url": "https://www.tre-pi.jus.br/partidos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Comunicação",
+        "url": "https://www.tre-pi.jus.br/comunicacao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Consulta à Jurisprudência",
+        "url": "https://jurisprudencia.tre-pi.jus.br/#/jurisprudencia/pesquisa",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Decisões dos Juízes Auxiliares",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/decisao-dos-juizes-auxiliares/decisao-dos-juizes-auxiliares",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Desincompatibilização",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/desincompatibilizacao/desincompatibilizacao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Ementário",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/ementario-1/ementario",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Pesquisa de Jurisprudência - Perguntas frequentes",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/perguntas-frequentes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Vocabulário controlado",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/vocabulario-controlado",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Informativo TRE-PI",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/informativo-tre-pi-1/informativo-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Publicações do TRE-PI",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia/publicacoes-do-tre-pi/publicacoes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Jurisprudência",
+        "url": "https://www.tre-pi.jus.br/jurisprudencia",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Código eleitoral anotado e legislação complementar",
+        "url": "https://www.tre-pi.jus.br/legislacao/codigo-eleitoral-anotado-e-legislacao-complementar",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Compêndios Eleitorais",
+        "url": "https://www.tre-pi.jus.br/legislacao/compendios-eleitorais-1/compendio-administrativo-2013-resolucoes-normativas-do-tre-pi-sistematizadas-atualizadas-e-anotadas",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Pesquisa à Legislação Eleitoral",
+        "url": "https://www.tre-pi.jus.br/legislacao/pesquisa-a-legislacao-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Portarias Normativas TRE-PI",
+        "url": "https://www.tre-pi.jus.br/legislacao/portarias-normativas-tre-pi/portarias-normativas-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Regimentos",
+        "url": "https://www.tre-pi.jus.br/legislacao/regimentos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Resoluções TRE-PI",
+        "url": "https://www.tre-pi.jus.br/legislacao/resolucoes-tre-pi-2/resolucoes-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Legislação Eleitoral e Partidária",
+        "url": "https://www.tre-pi.jus.br/legislacao/legislacao-eleitoral-e-partidaria-2/legislacao-eleitoral-e-partidaria",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Legislação",
+        "url": "https://www.tre-pi.jus.br/legislacao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Acompanhamento Processual e Push",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/acompanhamento-processual-e-push",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Autenticação de Documentos",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/autenticacao-de-documentos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Balcão Virtual",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/balcao-virtual-1/balcao-virtual",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "DataCor Eleitoral",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/datacor-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Diário da Justiça Eletrônico",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/diario-da-justica-eletronico",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Pautas, Sessões e Atas de Julgamento",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/pautas-e-atas-das-sessoes/sessoes-atas-e-pautas-de-julgamento",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "INFODIP WEB",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/infodip-web/infodip",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Mural Eletrônico (período de 15/08 a 19/12 de ano eleitoral)",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/mural-eletronico",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Sistema de Informações Eleitorais - SIEL",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/sistema-de-informacoes-eleitorais-siel-1/sistema-de-informacoes-eleitorais-siel",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Processo Judicial Eletrônico (PJe)",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/processo-judicial-eletronico-pje/processo-judicial-eletronico-pje",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Protocolo para Julgamento com Perspectiva de Gênero",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/protocolo-para-julgamento-com-perspectiva-de-genero",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Juízo 100% Digital",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/juizo-100-digital/apresentacao-do-juizo-100-digital",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Termo de Adesão - Intimações por meio eletrônico",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais/termo-de-adesao-intimacoes-por-meio-eletronico",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Serviços judiciais",
+        "url": "https://www.tre-pi.jus.br/servicos-judiciais",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Agenda TRE-PI",
+        "url": "https://www.tre-pi.jus.br/institucional/agenda-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Cadastro de Mulheres Juristas",
+        "url": "https://www.tre-pi.jus.br/institucional/repositorio-de-mulheres-juristas/cadastro-de-mulheres-juristas",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Conheça o TRE-PI",
+        "url": "https://www.tre-pi.jus.br/institucional/o-tre-pi/o-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Presidência",
+        "url": "https://www.tre-pi.jus.br/institucional/presidencia/estrutura-da-presidencia",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Diretoria Geral",
+        "url": "https://www.tre-pi.jus.br/institucional/diretoria-geral/diretoria-geral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Biblioteca",
+        "url": "https://www.tre-pi.jus.br/institucional/biblioteca/biblioteca-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Centro de Memória Eleitoral - CEMEL",
+        "url": "https://www.tre-pi.jus.br/institucional/memoria-e-cultura/espaco-memoria",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Carta de Serviços",
+        "url": "https://www.tre-pi.jus.br/institucional/carta-de-servicos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Composição do Tribunal",
+        "url": "https://www.tre-pi.jus.br/institucional/composicao-do-tribunal/membros-efetivos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Concursos e seleções",
+        "url": "https://www.tre-pi.jus.br/institucional/concurso-publico/concursos-e-selecoes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Contatos e Endereços",
+        "url": "https://www.tre-pi.jus.br/institucional/contatos-e-enderecos/contatos-e-enderecos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Corregedoria Regional Eleitoral",
+        "url": "https://www.tre-pi.jus.br/institucional/corregedoria-regional-eleitoral/corregedoria-regional-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Escola Judiciária Eleitoral",
+        "url": "https://www.tre-pi.jus.br/institucional/escola-judiciaria-eleitoral/institucional",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Espaço do Servidor",
+        "url": "https://portalservidor3.tre-pi.jus.br/portalservidor2/",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Gestão Documental",
+        "url": "https://www.tre-pi.jus.br/institucional/gestao-documental/comissao-permanente-de-avaliacao-de-documentos-cpad-1",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Horário de Atendimento",
+        "url": "https://www.tre-pi.jus.br/institucional/horario-de-atendimentos",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Laboratório de Inovação",
+        "url": "https://www.tre-pi.jus.br/institucional/liods-1/laboratorio-de-inovacao-e-dos-objetivos-de-desenvolvimento-sustentavel-liods-do-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Ouvidoria",
+        "url": "https://www.tre-pi.jus.br/institucional/ouvidoria/index",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Pesquisa de Satisfação",
+        "url": "https://www.tre-pi.jus.br/institucional/ouvidoria/pesquisa-de-satisfacao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Planejamento e gestão",
+        "url": "https://www.tre-pi.jus.br/institucional/planejamento-estrategico/conhecendo-a-equipe",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Premiações do TRE-PI",
+        "url": "https://www.tre-pi.jus.br/institucional/premiacoes-do-tre-pi/premiacoes-do-tre-pi",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Projetos sociais",
+        "url": "https://www.tre-pi.jus.br/institucional/projetos-sociais/responsabilidade-social",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Sistema Eletrônico de Informações (SEI)",
+        "url": "https://www.tre-pi.jus.br/institucional/sistema-eletronico-de-informacoes-sei",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Zonas Eleitorais",
+        "url": "https://www.tre-pi.jus.br/institucional/contatos-e-enderecos/consulta-zona",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Monitoramento e Fiscalização das Decisões do Sistema IDH",
+        "url": "https://www.tre-pi.jus.br/institucional/unidade-de-monitoramento-e-fiscalizacao/unidade-de-monitoramento-e-fiscalizacao",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "mais sobre Institucional",
+        "url": "https://www.tre-pi.jus.br/institucional",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "#Transparência e Prestação de Contas",
+        "url": "https://www.tre-pi.jus.br/list-subjects?subjects=Transpar%C3%AAncia%20e%20Presta%C3%A7%C3%A3o%20de%20Contas",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "https://www.tre-pi.jus.br/institucional/ouvidoria/respostas-as-perguntas-frequentes",
+        "url": "https://www.tre-pi.jus.br/institucional/ouvidoria/respostas-as-perguntas-frequentes",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Lei nº 12.527/2011",
+        "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "FALE COM A OUVIDORIA",
+        "url": "https://www.tre-pi.jus.br/institucional/ouvidoria/formulario-eletronico-sac-je",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Selo Diamante de Qualidade Eleitoral-",
+        "url": "https://www.tre-pi.jus.br/comunicacao/noticias/2025/Dezembro/tre-pi-conquista-premio-selo-201cdiamante201d-de-qualidade-2025-outorgado-pelo-cnj",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "TRE-PI recebe Selo “Tribunal Amigo da Pessoa Idosa” concedido pelo CNJ",
+        "url": "https://www.tre-pi.jus.br/comunicacao/noticias/2025/Outubro/tre-pi-recebe-selo-tribunal-amigo-da-pessoa-idosa",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Premio Inovação Eleitoral",
+        "url": "https://www.tre-pi.jus.br/comunicacao/noticias/2024/Maio/projeto-do-tre-pi-e-vencedor-do-i-premio-de-inovacao-eleitoral",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "CNJ - Selo Ouro 2024",
+        "url": "https://www.tre-pi.jus.br/comunicacao/noticias/2024/Dezembro/tre-pi-conquista-o-premio-201cselo-ouro-de-qualidade201d-do-cnj-com-92-6-de-eficiencia",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Facebook",
+        "url": "https://www.facebook.com/trepiaui/",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Twitter",
+        "url": "http://twitter.com/trepiaui",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Instagram",
+        "url": "https://www.instagram.com/trepiaui",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Youtube",
+        "url": "https://www.youtube.com/channel/UCkzdtZDDbMxw1IZAa9QDVdA",
+        "local_path": "",
+        "type": "video"
+      },
+      {
+        "title": "Flickr",
+        "url": "https://www.flickr.com/photos/144801833@N06",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Política de Privacidade",
+        "url": "https://www.hcaptcha.com/privacy",
+        "local_path": "",
+        "type": "unknown"
+      },
+      {
+        "title": "Termos de Serviço",
+        "url": "https://www.hcaptcha.com/terms",
+        "local_path": "",
+        "type": "unknown"
+      }
+    ]
+  },
+  "documents": [],
+  "tags": []
+}

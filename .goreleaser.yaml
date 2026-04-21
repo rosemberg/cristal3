@@ -1,0 +1,82 @@
+# GoReleaser configuration — site-research-mcp
+# Schema version: 2 (GoReleaser v2.x+)
+# Documentation: https://goreleaser.com/customization/
+version: 2
+
+project_name: site-research-mcp
+
+# ---------------------------------------------------------------------------
+# Builds
+# ---------------------------------------------------------------------------
+builds:
+  - id: site-research-mcp
+    main: ./cmd/site-research-mcp
+    binary: site-research-mcp
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    # Exclude windows/arm64 — not a common deployment target and untested.
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+# ---------------------------------------------------------------------------
+# Archives
+# ---------------------------------------------------------------------------
+archives:
+  - id: site-research-mcp
+    builds:
+      - site-research-mcp
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+    # Default format for non-windows targets is tar.gz.
+    formats:
+      - tar.gz
+
+# ---------------------------------------------------------------------------
+# Checksums
+# ---------------------------------------------------------------------------
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+  algorithm: sha256
+
+# ---------------------------------------------------------------------------
+# Snapshot (pre-release local build)
+# ---------------------------------------------------------------------------
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+# ---------------------------------------------------------------------------
+# Changelog
+# ---------------------------------------------------------------------------
+# The project does not have a git repository yet (no commits / no tags).
+# Disable changelog generation to avoid goreleaser failing on git operations.
+changelog:
+  disable: true
+
+# ---------------------------------------------------------------------------
+# Release
+# ---------------------------------------------------------------------------
+# No release provider configured in M4.
+# Production release: create git tag v0.1.0, then run:
+#   goreleaser release --clean
+# This will build all targets and upload to GitHub Releases if GITHUB_TOKEN
+# is set and the remote is github.com.
+release:
+  # Leaving this section empty uses GoReleaser defaults (GitHub auto-detect).
+  # To disable all uploads during local testing use:
+  #   goreleaser build --snapshot --clean
+  skip_upload: true

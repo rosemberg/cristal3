@@ -1,0 +1,667 @@
+import asyncio
+from mcp.server import Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+import structlog
+from pathlib import Path
+import yaml
+from typing import List, Dict
+import json
+import sys
+
+from .cache import CacheManager
+from .clients.site_research import SiteResearchClient
+from .clients.http import HTTPClient
+from .extractors.pdf import PDFExtractor
+from .extractors.spreadsheet import SpreadsheetExtractor
+from .metrics import get_metrics
+from .models import SourceMetadata, ExtractedData, ResearchResponse
+
+# Setup logging estruturado
+structlog.configure(
+    processors=[
+        structlog.stdlib.add_log_level,
+        structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.StackInfoRenderer(),
+        structlog.processors.format_exc_info,
+        structlog.processors.UnicodeDecoder(),
+        structlog.processors.JSONRenderer()
+    ],
+    wrapper_class=structlog.stdlib.BoundLogger,
+    context_class=dict,
+    logger_factory=structlog.PrintLoggerFactory(file=sys.stderr),
+    cache_logger_on_first_use=True,
+)
+
+log = structlog.get_logger()
+
+# Carregar config
+config_path = Path(__file__).parent.parent / "config.yaml"
+config = yaml.safe_load(config_path.read_text())
+
+# Inicializar componentes
+cache = CacheManager(
+    cache_dir=config['cache']['directory'],
+    ttl_queries=config['cache']['ttl_queries'],
+    ttl_documents=config['cache']['ttl_documents']
+)
+
+site_research = SiteResearchClient(config['mcp']['site_research_url'])
+http_client = HTTPClient(
+    timeout=config['http']['timeout'],
+    max_retries=config['http']['max_retries']
+)
+
+# Inicializar extractors
+extractors = [
+    PDFExtractor(),
+    SpreadsheetExtractor()
+]
+
+def _parse_markdown_urls(markdown: str) -> List[str]:
+    """Extrai URLs do Markdown retornado pelo site-research"""
+    import re
+    # Padrão: **URL:** https://...
+    pattern = r'\*\*URL:\*\*\s+(https?://[^\s\n]+)'
+    urls = re.findall(pattern, markdown)
+    return urls
+
+def _detect_content_type(url: str) -> str:
+    """Detecta o tipo de conteúdo pela extensão do arquivo"""
+    url_lower = url.lower()
+    if url_lower.endswith('.csv'):
+        return "text/csv"
+    elif url_lower.endswith(('.xlsx', '.xls')):
+        return "application/vnd.ms-excel"
+    elif url_lower.endswith('.pdf'):
+        return "application/pdf"
+    else:
+        # Fallback para PDF se não conseguir detectar
+        return "application/pdf"
+
+def _prioritize_documents(documents: List[str]) -> List[str]:
+    """Ordena documentos por prioridade: CSV > Excel > PDF"""
+
+    def get_priority(url: str) -> int:
+        """Retorna prioridade (menor número = maior prioridade)"""
+        url_lower = url.lower()
+        if url_lower.endswith('.csv'):
+            return 1  # Prioridade mais alta
+        elif url_lower.endswith(('.xlsx', '.xls')):
+            return 2  # Prioridade média
+        elif url_lower.endswith('.pdf'):
+            return 3  # Prioridade mais baixa
+        else:
+            return 4  # Desconhecido - menor prioridade
+
+    # Ordenar por prioridade
+    return sorted(documents, key=get_priority)
+
+def get_extractor(content_type: str, url: str):
+    for extractor in extractors:
+        if extractor.can_handle(content_type, url):
+            return extractor
+    return None
+
+# Criar servidor MCP
+server = Server("data-orchestrator")
+
+async def validate_site_research():
+    """Valida que site-research está disponível"""
+    try:
+        # Testar conexão
+        test = await site_research.search("teste", limit=1)
+        log.info("site_research_validated", status="ok")
+        return True
+    except NotImplementedError as e:
+        log.error("site_research_not_implemented", error=str(e))
+        return False
+    except Exception as e:
+        log.error("site_research_connection_failed", error=str(e))
+        return False
+
+@server.list_tools()
+async def list_tools():
+    return [
+        Tool(
+            name="research",
+            description="""Busca COMPLETA no portal TRE-PI com extração automática de dados e valores.
+
+USO OBRIGATÓRIO para queries sobre VALORES, TOTAIS, GASTOS, QUANTIAS:
+- "Quanto foi gasto em X?" → USE ESTE TOOL
+- "Total de gastos com Y" → USE ESTE TOOL
+- "Valor de Z em 2026" → USE ESTE TOOL
+- "Comparar gastos X e Y" → USE ESTE TOOL
+
+O que este tool faz automaticamente:
+1. Busca no índice do portal (656 páginas)
+2. Encontra documentos relevantes (PDFs, Excel, CSV)
+3. Baixa e extrai dados automaticamente
+4. Calcula totais e agregações
+5. Retorna com FONTES rastreáveis (URLs + timestamps)
+
+NÃO use site-research diretamente para queries de valores - este tool já faz tudo.""",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Consulta de busca (ex: 'gastos com diárias em fev/mar 2026')"},
+                    "force_fetch": {"type": "boolean", "default": False, "description": "Forçar busca ignorando cache"}
+                },
+                "required": ["query"]
+            }
+        ),
+        Tool(
+            name="get_cached",
+            description="Retorna dados do cache se disponíveis",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"}
+                },
+                "required": ["query"]
+            }
+        ),
+        Tool(
+            name="get_document",
+            description="Baixa e extrai dados de documento específico",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "url": {"type": "string", "description": "URL do documento"}
+                },
+                "required": ["url"]
+            }
+        ),
+        Tool(
+            name="metrics",
+            description="Retorna métricas e estatísticas do sistema",
+            inputSchema={
+                "type": "object",
+                "properties": {},
+                "required": []
+            }
+        )
+    ]
+
+@server.call_tool()
+async def call_tool(name: str, arguments: dict):
+    log.info("tool_called", tool=name, args=arguments)
+
+    try:
+        if name == "research":
+            return await research(
+                query=arguments["query"],
+                force_fetch=arguments.get("force_fetch", False)
+            )
+
+        elif name == "get_cached":
+            return await get_cached(query=arguments["query"])
+
+        elif name == "get_document":
+            return await get_document(url=arguments["url"])
+
+        elif name == "metrics":
+            return await get_metrics_summary()
+
+        else:
+            raise ValueError(f"Unknown tool: {name}")
+
+    except Exception as e:
+        metrics = get_metrics()
+        metrics.increment_error()
+        log.error("tool_error", tool=name, error=str(e), exc_info=True)
+        raise
+
+async def research(query: str, force_fetch: bool = False):
+    """Busca completa com validação obrigatória"""
+
+    metrics = get_metrics()
+
+    try:
+        # 1. Verificar cache
+        if not force_fetch:
+            cached = cache.get_query(query)
+            if cached:
+                metrics.increment_cache_hit()
+                log.info("cache_hit", query=query)
+                # Converter cache antigo para ResearchResponse
+                if isinstance(cached.summary, dict):
+                    # Cache antigo - criar ResearchResponse compatível
+                    response = ResearchResponse(
+                        query=query,
+                        total_sources=cached.summary.get('extracted_documents', 0),
+                        sources=[],  # Cache antigo não tem ExtractedData
+                        aggregated_data=cached.summary,
+                        cache_hit=True
+                    )
+                    return _format_response(response)
+
+        # Cache miss
+        metrics.increment_cache_miss()
+
+        # 2. 🔥 BUSCA OBRIGATÓRIA no site-research
+        log.info("searching_portal", query=query)
+
+        try:
+            log.info("calling_site_research_search", query=query)
+            markdown_results = await site_research.search(query, limit=10)
+            log.info("site_research_returned", markdown_len=len(markdown_results))
+        except FileNotFoundError as e:
+            # site-research-mcp não compilado
+            return [TextContent(type="text", text=f"""❌ **ERRO:** site-research MCP não encontrado
+
+{str(e)}
+
+**Solução:**
+1. Compile o site-research:
+   cd /Users/rosemberg/projetos-gemini/cristal3
+   go build -o bin/site-research-mcp ./cmd/site-research-mcp
+
+2. Verifique se o índice existe:
+   ls -la data/index/
+""")]
+        except ConnectionError as e:
+            # Erro de conexão com o MCP
+            log.error("site_research_connection_failed", error=str(e))
+            return [TextContent(type="text", text=f"""❌ **ERRO:** Falha ao conectar com site-research
+
+{str(e)}
+
+**Possíveis causas:**
+1. site-research-mcp não está respondendo
+2. Índice do portal não foi criado
+3. Erro de configuração
+
+**Para debugar:**
+1. Teste o site-research diretamente:
+   /Users/rosemberg/projetos-gemini/cristal3/bin/site-research-mcp
+
+2. Verifique os logs
+""")]
+        except NotImplementedError as e:
+            # Mock ainda ativo
+            return [TextContent(type="text", text=f"""❌ **ERRO CRÍTICO:** Sistema de busca não disponível
+
+{str(e)}
+
+**Para usar este MCP, você precisa:**
+1. Configurar o site-research MCP no .mcp.json
+2. Aprovar o site-research no Claude Code
+3. Garantir que o índice do portal está atualizado
+
+**Dados locais NÃO são permitidos** para garantir rastreabilidade.
+""")]
+        except Exception as e:
+            # Outros erros genéricos
+            log.error("search_failed", error=str(e), exc_info=True)
+            return [TextContent(type="text", text=f"""❌ **ERRO:** Falha ao buscar no portal
+
+Erro: {str(e)}
+
+**Debug info:**
+- Verifique se o site-research-mcp está funcionando
+- Veja os logs para mais detalhes
+- Tente novamente em alguns instantes
+""")]
+
+        if not markdown_results or len(markdown_results.strip()) == 0:
+            return [TextContent(type="text", text="⚠️ Nenhum resultado encontrado no portal para essa consulta.")]
+
+        metrics.increment_search()
+        log.info("search_completed", query=query)
+
+        # 3. Parsear URLs do Markdown
+        page_urls = _parse_markdown_urls(markdown_results)
+        log.info("pages_found", count=len(page_urls))
+
+        # 4. Detectar se precisa de dados detalhados (valores, totais, etc)
+        needs_extraction = _needs_detailed_data(query, [])
+
+        if not needs_extraction or len(page_urls) == 0:
+            # Retornar apenas o Markdown se não precisar de extração
+            return [TextContent(type="text", text=markdown_results)]
+
+        # 5. Extrair documentos das páginas encontradas
+        log.info("extraction_required", query=query, pages_count=len(page_urls))
+        extracted_sources = []
+
+        # Limitar a 3 primeiras páginas para evitar timeout
+        for page_url in page_urls[:3]:
+            log.info("inspecting_page", url=page_url)
+
+            try:
+                # Usar inspect_page para obter documentos da página
+                page_data = await site_research.inspect_page(page_url)
+
+                if not page_data or 'documents' not in page_data:
+                    continue
+
+                documents = page_data.get('documents', [])
+                if not documents:
+                    continue
+
+                # Priorizar documentos estruturados (CSV/Excel) sobre PDF
+                prioritized_docs = _prioritize_documents(documents[:2])
+
+                for doc_url in prioritized_docs:  # Max 2 docs por página
+                    log.info("auto_extracting", url=doc_url)
+
+                    # Verificar cache de documento
+                    doc_cached = cache.get_document(doc_url)
+                    if doc_cached:
+                        metrics.increment_cache_hit()
+                        log.info("document_cache_hit", url=doc_url)
+                        if isinstance(doc_cached, ExtractedData):
+                            extracted_sources.append(doc_cached)
+                        continue
+
+                    metrics.increment_cache_miss()
+
+                    # Fetch e extração
+                    # Fetch e extração
+                    try:
+                        metrics.increment_document_fetch()
+                        content = await http_client.fetch(doc_url)
+
+                        if content:
+                            metrics.add_bytes_fetched(len(content))
+                            # Detectar tipo de conteúdo pela extensão
+                            content_type = _detect_content_type(doc_url)
+                            extractor = get_extractor(content_type, doc_url)
+
+                            if extractor:
+                                # Criar metadados de rastreabilidade
+                                if ".csv" in doc_url.lower():
+                                    source_type = "csv"
+                                elif ".xls" in doc_url.lower():
+                                    source_type = "excel"
+                                else:
+                                    source_type = "pdf"
+
+                                metadata = SourceMetadata(
+                                    url=doc_url,
+                                    source_type=source_type,
+                                    document_title=page_data.get('title'),
+                                    portal_section=page_data.get('section'),
+                                    file_size=len(content)
+                                )
+
+                                # Extrair com metadados
+                                extracted = await extractor.extract(content, metadata)
+
+                                # Atualizar métricas
+                                metrics.increment_extraction_success()
+                                if extracted.success and extracted.data:
+                                    if 'pages' in extracted.data:
+                                        metrics.add_pages_processed(extracted.data['pages'])
+                                    if 'total' in extracted.data:
+                                        metrics.add_values_extracted(extracted.data['total'])
+
+                                cache.set_document(doc_url, extracted)
+                                extracted_sources.append(extracted)
+                                log.info("extraction_success", url=doc_url, success=extracted.success)
+
+                    except Exception as e:
+                        metrics.increment_extraction_failed()
+                        metrics.increment_error()
+                        log.error("extraction_failed", url=doc_url, error=str(e), exc_info=True)
+                        continue
+
+            except Exception as e:
+                log.error("page_inspection_failed", url=page_url, error=str(e))
+                continue
+
+        # 6. Agregar dados extraídos
+        aggregated = None
+        if extracted_sources:
+            totals = []
+            count = 0
+
+            for source in extracted_sources:
+                if source.success and source.data:
+                    if 'total' in source.data and source.data['total'] > 0:
+                        totals.append(source.data['total'])
+                    if 'valores_encontrados' in source.data:
+                        count += source.data['valores_encontrados']
+
+            if totals:
+                aggregated = {
+                    "total": sum(totals),
+                    "count": count
+                }
+
+        # 7. Criar ResearchResponse
+        response = ResearchResponse(
+            query=query,
+            total_sources=len(extracted_sources),
+            sources=extracted_sources,
+            aggregated_data=aggregated,
+            cache_hit=False
+        )
+
+        # Cachear resultado (CacheEntry.summary espera dict)
+        cache.set_query(query, response.model_dump(mode="json"))
+        metrics.increment_research()
+
+        log.info("research_completed", query=query, extracted_docs=len(extracted_sources))
+
+        # 8. Formatar e retornar
+        formatted = _format_response(response)
+        return [TextContent(type="text", text=formatted["content"][0]["text"])]
+
+    except Exception as e:
+        metrics.increment_error()
+        log.error("research_failed", query=query, error=str(e), exc_info=True)
+        return [TextContent(type="text", text=f"Erro ao processar busca: {str(e)}\n\nPor favor, tente novamente ou verifique os logs.")]
+def _needs_detailed_data(query: str, results: List[Dict]) -> bool:
+    """Detecta se query precisa de dados extraídos"""
+    keywords = ['quanto', 'valor', 'total', 'gasto', 'custo', 'despesa', 'gastos']
+    query_lower = query.lower()
+    return any(kw in query_lower for kw in keywords)
+
+def _format_response(research_response: ResearchResponse) -> Dict:
+    """Formata resposta MCP com RASTREABILIDADE COMPLETA"""
+
+    text = f"# Resultados: {research_response.query}\n\n"
+
+    # Timestamp da consulta
+    text += f"🕐 **Consulta realizada em:** {research_response.search_timestamp.strftime('%d/%m/%Y %H:%M:%S')}\n\n"
+
+    # Cache hit indicator
+    if research_response.cache_hit:
+        text += "💾 **Fonte:** Cache local\n\n"
+
+    # Dados agregados (se houver)
+    if research_response.aggregated_data:
+        agg = research_response.aggregated_data
+
+        if 'total' in agg:
+            text += f"## 💰 Resumo\n\n"
+            text += f"- **Total:** R$ {agg['total']:,.2f}\n"
+            text += f"- **Registros:** {agg.get('count', 0)}\n"
+            text += f"- **Documentos analisados:** {research_response.total_sources}\n\n"
+
+    # 🔥 FONTES COM METADADOS COMPLETOS (OBRIGATÓRIO)
+    text += f"## 📄 Fontes de Dados ({research_response.total_sources})\n\n"
+
+    if research_response.sources and len(research_response.sources) > 0:
+        for idx, source in enumerate(research_response.sources, 1):
+            meta = source.metadata
+
+            text += f"### {idx}. {meta.document_title or 'Documento'}\n\n"
+            text += f"- **🔗 URL:** {meta.url}\n"
+            text += f"- **📁 Tipo:** {meta.source_type}\n"
+            text += f"- **📂 Seção:** {meta.portal_section or 'N/A'}\n"
+            text += f"- **🕐 Extraído em:** {meta.extracted_at.strftime('%d/%m/%Y %H:%M:%S')}\n"
+
+            if meta.document_date:
+                text += f"- **📅 Data do documento:** {meta.document_date}\n"
+
+            # Dados extraídos deste documento
+            if source.success and source.data:
+                if 'total' in source.data:
+                    text += f"- **💰 Valor:** R$ {source.data['total']:,.2f}\n"
+                if 'rows' in source.data:
+                    text += f"- **📊 Registros:** {source.data['rows']}\n"
+            else:
+                text += f"- **⚠️ Erro:** {source.error}\n"
+
+            text += "\n"
+    else:
+        text += "⚠️ **ALERTA:** Nenhuma fonte identificada!\n\n"
+
+    # Rodapé com informações de rastreabilidade
+    text += "---\n\n"
+    text += "**📌 Rastreabilidade**\n\n"
+    text += "Todos os dados apresentados possuem fonte identificável.\n"
+    text += "Clique nos links de URL para verificar os documentos originais.\n"
+
+    return {"content": [{"type": "text", "text": text}]}
+
+async def get_cached(query: str):
+    """Retorna dados do cache"""
+    cached = cache.get_query(query)
+
+    if not cached:
+        return {
+            "content": [
+                {"type": "text", "text": "Cache não encontrado"}
+            ]
+        }
+
+    return {
+        "content": [
+            {
+                "type": "text",
+                "text": f"# Cache: {query}\n\n{cached.summary}"
+            }
+        ]
+    }
+
+async def get_document(url: str):
+    """Baixa e extrai documento específico"""
+
+    metrics = get_metrics()
+
+    try:
+        # 1. Verificar cache
+        cached = cache.get_document(url)
+        if cached:
+            metrics.increment_cache_hit()
+            log.info("document_cache_hit", url=url)
+            return {"content": [{"type": "text", "text": str(cached)}]}
+
+        metrics.increment_cache_miss()
+
+        # 2. Fazer download
+        log.info("fetching_document", url=url)
+        metrics.increment_document_fetch()
+        content = await http_client.fetch(url)
+
+        if not content:
+            log.warning("fetch_failed_empty", url=url)
+            return {"content": [{"type": "text", "text": "Erro ao baixar documento"}], "isError": True}
+
+        metrics.add_bytes_fetched(len(content))
+
+        # 3. Detectar tipo e extrair
+        content_type = "application/pdf"  # Simplificado, melhorar depois
+        extractor = get_extractor(content_type, url)
+
+        if not extractor:
+            log.warning("no_extractor_found", url=url, content_type=content_type)
+            return {"content": [{"type": "text", "text": "Tipo de documento não suportado"}], "isError": True}
+
+        extracted = await extractor.extract(content)
+
+        # Atualizar métricas
+        metrics.increment_extraction_success()
+        if 'pages' in extracted:
+            metrics.add_pages_processed(extracted['pages'])
+        if 'total' in extracted:
+            metrics.add_values_extracted(extracted['total'])
+
+        # 4. Cachear
+        cache.set_document(url, extracted)
+        log.info("document_extracted", url=url, pages=extracted.get('pages', 0))
+
+        # 5. Retornar
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"# Documento extraído\n\n{json.dumps(extracted, indent=2, ensure_ascii=False)}"
+                }
+            ]
+        }
+
+    except Exception as e:
+        metrics.increment_extraction_failed()
+        metrics.increment_error()
+        log.error("get_document_failed", url=url, error=str(e), exc_info=True)
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": f"Erro ao processar documento: {str(e)}"
+                }
+            ],
+            "isError": True
+        }
+
+async def get_metrics_summary():
+    """Retorna resumo das métricas do sistema"""
+    metrics = get_metrics()
+    summary = metrics.get_summary()
+
+    # Formatar para exibição
+    text = "# Métricas do Sistema\n\n"
+
+    text += "## Uptime\n"
+    text += f"- Iniciado: {summary['uptime']['started_at']}\n"
+    text += f"- Tempo ativo: {summary['uptime']['hours']:.2f} horas\n\n"
+
+    text += "## Cache\n"
+    text += f"- Hits: {summary['cache']['hits']}\n"
+    text += f"- Misses: {summary['cache']['misses']}\n"
+    text += f"- Taxa de acerto: {summary['cache']['hit_rate']}\n\n"
+
+    text += "## Extrações\n"
+    text += f"- Sucesso: {summary['extractions']['success']}\n"
+    text += f"- Falhas: {summary['extractions']['failed']}\n"
+    text += f"- Taxa de sucesso: {summary['extractions']['success_rate']}\n"
+    text += f"- Páginas processadas: {summary['extractions']['total_pages']}\n"
+    text += f"- Valores extraídos: {summary['extractions']['total_values']}\n\n"
+
+    text += "## Operações\n"
+    text += f"- Buscas realizadas: {summary['operations']['searches']}\n"
+    text += f"- Documentos baixados: {summary['operations']['documents_fetched']}\n"
+    text += f"- Dados transferidos: {summary['operations']['total_mb']}\n\n"
+
+    text += "## Erros\n"
+    text += f"- Total: {summary['errors']['total']}\n"
+
+    log.info("metrics_requested", summary=summary)
+
+    return {
+        "content": [
+            {
+                "type": "text",
+                "text": text
+            }
+        ]
+    }
+
+async def main():
+    log.info("server_starting", name="data-orchestrator")
+    try:
+        async with stdio_server() as (read_stream, write_stream):
+            await server.run(read_stream, write_stream, server.create_initialization_options())
+    finally:
+        # Cleanup
+        log.info("shutting_down")
+        await site_research.close()
+        await http_client.close()
+
+if __name__ == "__main__":
+    asyncio.run(main())
