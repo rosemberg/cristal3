@@ -18,21 +18,24 @@ const UserBubble: React.FC<UserBubbleProps> = ({
   className = ''
 }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginBottom: '16px' }} className={className}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', maxWidth: '80%' }}>
-        <div style={{
-          backgroundColor: '#3b82f6',
-          color: 'white',
-          padding: '12px 16px',
-          borderRadius: '16px',
-          borderBottomRightRadius: '4px',
-          wordBreak: 'break-word'
-        }}>
-          <p style={{ fontSize: '14px', lineHeight: '1.6', margin: 0 }}>{content}</p>
+    <div
+      className={`flex justify-end gap-3 mb-[22px] max-w-[880px] mx-auto ${className}`}
+    >
+      <div className="flex flex-col items-end" style={{ maxWidth: '560px' }}>
+        <div
+          className="px-[18px] py-[13px] shadow-[0_2px_0_rgba(6,26,68,0.12)]"
+          style={{
+            backgroundColor: 'var(--navy-800)',
+            color: '#fff',
+            borderRadius: 'var(--radius-bubble)',
+            borderBottomRightRadius: '6px',
+            fontSize: '14.5px',
+            lineHeight: '1.45',
+            fontWeight: '500',
+          }}
+        >
+          <p style={{ margin: 0 }}>{content}</p>
         </div>
-        <span style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>
-          {formatTime(timestamp)}
-        </span>
       </div>
       <Avatar type="user" />
     </div>

@@ -74,17 +74,20 @@ const ComposerInput: React.FC<ComposerInputProps> = React.memo(({
         resize-none
         overflow-y-auto
         bg-transparent
-        text-text-main
-        placeholder:text-text-secondary
+        border-0
+        outline-none
         focus:outline-none
         disabled:opacity-50
         disabled:cursor-not-allowed
         ${className}
       `}
       style={{
-        minHeight: '44px',
-        maxHeight: `${maxRows * 20}px`,
-        lineHeight: '20px',
+        minHeight: '40px',
+        maxHeight: `${maxRows * 22}px`,
+        lineHeight: '22px',
+        fontSize: '15px',
+        padding: '9px 6px',
+        color: 'var(--ink-900)',
       }}
     />
   );

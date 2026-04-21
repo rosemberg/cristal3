@@ -1,15 +1,46 @@
 /* Loading dots animation */
 @keyframes pulse-dot {
-  0%, 100% {
+  0%, 60%, 100% {
     opacity: 0.3;
   }
-  50% {
+  30% {
     opacity: 1;
+    transform: translateY(-2px);
   }
 }
 
 .animate-pulse-dot {
-  animation: pulse-dot 1.4s ease-in-out infinite;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+/* Fade in animation for messages */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.28s ease-out both;
+}
+
+/* Fade in for modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.18s ease-out;
 }
 
 /* Smooth transitions */

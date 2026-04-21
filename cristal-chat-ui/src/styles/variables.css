@@ -1,23 +1,69 @@
-/* TRE-PI Institutional Colors */
+/* Cristal — Portal da Transparência Design */
 :root {
-  /* Cores principais */
-  --dark-blue: #0C326F;        /* Header, rodapé, títulos */
-  --primary-blue: #1351B4;     /* Botão principal, bolha usuário */
-  --flag-yellow: #FFCD07;      /* CTA, divisória, sublinhado links */
-  --urn-green: #1D9E75;        /* URLs em monospace */
+  /* Navy colors */
+  --navy-900: #061a44;
+  --navy-800: #0a2662;
+  --navy-700: #103080;
+  --navy-600: #1a3fa0;
+  --navy-500: #2c55c7;
+  --navy-300: #a9b8e3;
+  --navy-200: #c2cfee;
+  --navy-100: #dde5f6;
+  --navy-050: #eef2fb;
 
-  /* Cores secundárias */
-  --light-blue-text: #B5D4F4;  /* Texto secundário header */
-  --pale-blue-bg: #E6F1FB;     /* Chips de sugestão */
+  /* Gold/Yellow accent */
+  --gold-600: #c89a0a;
+  --gold-500: #e4b217;
+  --gold-400: #f5c518;
+  --gold-300: #f7d456;
+  --gold-100: #fdefb8;
 
-  /* Backgrounds */
-  --chat-bg: #F7F7F5;          /* Área de rolagem */
-  --card-bg: #FFFFFF;          /* Cards e input */
+  /* Ink (text) colors */
+  --ink-900: #0c1730;
+  --ink-700: #374562;
+  --ink-500: #5e6d8c;
+  --ink-400: #8493ae;
+  --ink-300: #b6c0d3;
 
-  /* Textos */
-  --text-main: #1F2329;        /* Texto principal */
-  --text-secondary: #5F5E5A;   /* Metadados */
+  /* Surface colors */
+  --paper: #f7f8fc;
+  --paper-2: #eef1f8;
+  --surface: #ffffff;
+  --line: #e3e8f2;
+  --line-2: #d5dcec;
 
-  /* Bordas */
-  --border-subtle: #D3D1C7;
+  /* Green for URLs/status */
+  --green-700: #1f7a3a;
+  --green-500: #2ea44f;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-bubble: 22px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(6, 26, 68, 0.06);
+  --shadow-md: 0 6px 24px -8px rgba(6, 26, 68, 0.18);
+  --shadow-lg: 0 20px 60px -20px rgba(6, 26, 68, 0.28);
+
+  /* Typography */
+  --font-sans: "Inter Tight", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Aliases for backward compatibility */
+  --dark-blue: var(--navy-800);
+  --primary-blue: var(--navy-700);
+  --flag-yellow: var(--gold-400);
+  --accent: var(--gold-400);
+  --urn-green: var(--green-700);
+  --light-blue-text: var(--navy-100);
+  --pale-blue-bg: var(--navy-050);
+  --chat-bg: var(--paper);
+  --card-bg: var(--surface);
+  --text-main: var(--ink-900);
+  --text-secondary: var(--ink-500);
+  --border-subtle: var(--line);
 }

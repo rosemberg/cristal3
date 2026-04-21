@@ -22,11 +22,34 @@ const CitationInline: React.FC<CitationInlineProps> = ({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`text-primary-blue hover:text-[#0F428C] border-b-2 border-flag-yellow transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flag-yellow rounded ${className}`}
+      className={`cursor-pointer transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-300 rounded ${className}`}
+      style={{
+        color: 'var(--navy-700)',
+        fontWeight: '500',
+        textDecoration: 'underline',
+        textDecorationColor: 'var(--gold-400)',
+        textDecorationThickness: '2px',
+        textUnderlineOffset: '3px',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = 'var(--navy-900)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = 'var(--navy-700)';
+      }}
       aria-label={`Citação ${number}`}
     >
       {children}
-      <sup className="text-primary-blue font-semibold ml-0.5">[{number}]</sup>
+      <sup
+        className="ml-0.5"
+        style={{
+          color: 'var(--navy-600)',
+          fontSize: '11px',
+          fontFamily: 'var(--font-mono)',
+        }}
+      >
+        {number}
+      </sup>
     </a>
   );
 };

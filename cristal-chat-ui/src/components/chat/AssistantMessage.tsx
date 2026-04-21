@@ -32,35 +32,55 @@ const AssistantMessage: React.FC<AssistantMessageProps> = ({
   );
 
   return (
-    <div className={`flex gap-3 mb-4 ${className}`}>
+    <div className={`flex gap-3 mb-[22px] max-w-[880px] mx-auto ${className}`}>
       <Avatar type="assistant" />
-      <div className="flex flex-col max-w-[80%] sm:max-w-[80%]">
-        <div className="prose prose-sm max-w-none break-words">
+      <div className="flex flex-col max-w-[720px]" style={{ minWidth: 0 }}>
+        <div
+          className="prose prose-sm max-w-none break-words"
+          style={{
+            color: 'var(--ink-900)',
+            fontSize: '14.5px',
+            lineHeight: '1.6',
+          }}
+        >
           <ReactMarkdown
             rehypePlugins={[rehypeRaw]}
             components={{
               a: ({ ...props }) => (
                 <a
                   {...props}
-                  className="text-primary-blue underline hover:text-dark-blue transition-colors duration-200"
+                  className="transition-colors duration-150"
+                  style={{
+                    color: 'var(--navy-700)',
+                    textDecoration: 'underline',
+                    textDecorationColor: 'var(--gold-400)',
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                 />
               ),
               p: ({ ...props }) => (
-                <p {...props} className="mb-2 last:mb-0 text-text-main" />
+                <p {...props} className="mb-2.5 last:mb-0" style={{ color: 'var(--ink-900)' }} />
               ),
               ul: ({ ...props }) => (
-                <ul {...props} className="list-disc list-inside mb-2 text-text-main" />
+                <ul {...props} className="list-disc list-inside mb-2.5" style={{ color: 'var(--ink-900)' }} />
               ),
               ol: ({ ...props }) => (
-                <ol {...props} className="list-decimal list-inside mb-2 text-text-main" />
+                <ol {...props} className="list-decimal list-inside mb-2.5" style={{ color: 'var(--ink-900)' }} />
               ),
               strong: ({ ...props }) => (
-                <strong {...props} className="font-semibold text-text-main" />
+                <strong {...props} className="font-semibold" style={{ color: 'var(--ink-900)' }} />
               ),
               code: ({ ...props }) => (
-                <code {...props} className="bg-pale-blue-bg px-1 py-0.5 rounded text-sm font-mono text-urn-green" />
+                <code
+                  {...props}
+                  className="px-1.5 py-0.5 rounded text-sm"
+                  style={{
+                    backgroundColor: 'var(--navy-050)',
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--green-700)',
+                  }}
+                />
               ),
               // Componente customizado para citações
               cite: ({ node, children }) => {
@@ -82,12 +102,9 @@ const AssistantMessage: React.FC<AssistantMessageProps> = ({
             {processedContent}
           </ReactMarkdown>
         </div>
-        <span className="text-xs text-text-secondary mt-1">
-          {formatTime(timestamp)}
-        </span>
 
         {citations && citations.length > 0 && (
-          <CitationsBlock citations={citations} className="mt-4" />
+          <CitationsBlock citations={citations} className="mt-3.5" />
         )}
       </div>
     </div>

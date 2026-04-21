@@ -19,17 +19,19 @@ const Avatar: React.FC<AvatarProps> = ({
     return (
       <div
         style={{
-          width: '32px',
-          height: '32px',
+          width: '30px',
+          height: '30px',
           borderRadius: '50%',
-          backgroundColor: '#3b82f6',
-          color: 'white',
+          backgroundColor: 'var(--ink-300)',
+          color: '#fff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '12px',
-          fontWeight: '600',
-          flexShrink: 0
+          fontSize: '11px',
+          fontWeight: '700',
+          letterSpacing: '0.04em',
+          flexShrink: 0,
+          marginTop: '4px',
         }}
         className={className}
         aria-label="Avatar do usuário"
@@ -42,20 +44,20 @@ const Avatar: React.FC<AvatarProps> = ({
   return (
     <div
       style={{
-        width: '32px',
-        height: '32px',
+        width: '34px',
+        height: '34px',
         borderRadius: '50%',
-        backgroundColor: 'white',
-        border: '2px solid #FFCD07',
+        backgroundColor: 'var(--navy-800)',
+        border: '2px solid var(--gold-400)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexShrink: 0
+        flexShrink: 0,
       }}
       className={className}
       aria-label="Avatar do assistente Cristal"
     >
-      <span style={{ fontSize: '16px' }}>💎</span>
+      <DiamondIcon size={17} style={{ color: '#fff' }} />
     </div>
   );
 };

@@ -13,25 +13,43 @@ const ComposerToolbar: React.FC<ComposerToolbarProps> = React.memo(({
   className = '',
 }) => {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-0 ${className}`}>
       <button
         type="button"
         onClick={onAttachClick}
-        className="p-2 text-text-secondary hover:text-text-main hover:bg-chat-bg rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flag-yellow"
+        className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-300"
+        style={{ color: 'var(--ink-500)' }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--navy-050)';
+          e.currentTarget.style.color = 'var(--navy-800)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.color = 'var(--ink-500)';
+        }}
         aria-label="Anexar arquivo"
-        title="Anexar arquivo"
+        title="Anexar"
       >
-        <AttachIcon size={20} />
+        <AttachIcon size={18} />
       </button>
 
       <button
         type="button"
         onClick={onMicClick}
-        className="p-2 text-text-secondary hover:text-text-main hover:bg-chat-bg rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flag-yellow"
+        className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-300"
+        style={{ color: 'var(--ink-500)' }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--navy-050)';
+          e.currentTarget.style.color = 'var(--navy-800)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.color = 'var(--ink-500)';
+        }}
         aria-label="Gravar áudio"
-        title="Gravar áudio"
+        title="Ditar por voz"
       >
-        <MicIcon size={20} />
+        <MicIcon size={18} />
       </button>
     </div>
   );

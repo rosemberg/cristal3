@@ -47,55 +47,62 @@ const Composer: React.FC<ComposerProps> = memo(({
   }, []);
 
   return (
-    <div className={`bg-card-bg border-t border-border-subtle ${className}`}>
-      {/* Meta bar (condicional) */}
-      {showMetaBar && (
-        <div className="px-3 sm:px-4 pt-3 pb-2">
-          <ComposerMeta
-            onClearClick={onClearChat ? handleClear : undefined}
-            showClearButton={!!onClearChat}
-          />
-        </div>
-      )}
+    <div className={`bg-surface border-t border-line ${className}`} style={{ paddingTop: '16px', paddingBottom: '18px' }}>
+      {/* Composer pill container */}
+      <div className="max-w-[880px] mx-auto px-6">
+        {/* Composer pill */}
+        <div
+          className={`
+            bg-white border rounded-full
+            px-[18px] py-[6px]
+            flex items-center gap-[6px]
+            transition-all duration-150
+            ${isFocused ? 'shadow-[0_0_0_4px_rgba(44,85,199,0.08)]' : 'shadow-[0_1px_2px_rgba(6,26,68,0.04)]'}
+            ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
+          `}
+          style={{
+            borderColor: isFocused ? 'var(--navy-300)' : 'var(--line-2)',
+          }}
+        >
+          {/* Toolbar à esquerda */}
+          <div className="flex-shrink-0">
+            <ComposerToolbar
+              onAttachClick={handleAttach}
+              onMicClick={handleMic}
+            />
+          </div>
 
-      {/* Input área com border pill */}
-      <div className={`
-        mx-3 sm:mx-4 mb-3 sm:mb-4 px-3 sm:px-4 py-3
-        ${showMetaBar ? 'mt-0' : 'mt-3 sm:mt-4'}
-        border-2 rounded-pill
-        flex items-end gap-2 sm:gap-3
-        transition-all duration-200
-        ${isFocused ? 'border-primary-blue shadow-md' : 'border-border-subtle'}
-        ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}
-      `}>
-        {/* Toolbar à esquerda */}
-        <div className="flex-shrink-0 self-end pb-0.5">
-          <ComposerToolbar
-            onAttachClick={handleAttach}
-            onMicClick={handleMic}
-          />
+          {/* Input expansível no centro */}
+          <div className="flex-1 min-w-0">
+            <ComposerInput
+              value={inputValue}
+              onChange={setInputValue}
+              onSubmit={handleSubmit}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              disabled={isDisabled}
+              placeholder={placeholder}
+            />
+          </div>
+
+          {/* Botão de enviar à direita */}
+          <div className="flex-shrink-0">
+            <SendButton
+              onClick={handleSubmit}
+              disabled={!inputValue.trim() || isDisabled}
+            />
+          </div>
         </div>
 
-        {/* Input expansível no centro */}
-        <div className="flex-1 min-w-0">
-          <ComposerInput
-            value={inputValue}
-            onChange={setInputValue}
-            onSubmit={handleSubmit}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            disabled={isDisabled}
-            placeholder={placeholder}
-          />
-        </div>
-
-        {/* Botão de enviar à direita */}
-        <div className="flex-shrink-0 self-end pb-0.5">
-          <SendButton
-            onClick={handleSubmit}
-            disabled={!inputValue.trim() || isDisabled}
-          />
-        </div>
+        {/* Meta bar (condicional, abaixo do composer) */}
+        {showMetaBar && (
+          <div className="mt-[10px]">
+            <ComposerMeta
+              onClearClick={onClearChat ? handleClear : undefined}
+              showClearButton={!!onClearChat}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

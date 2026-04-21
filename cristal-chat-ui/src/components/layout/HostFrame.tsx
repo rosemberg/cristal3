@@ -14,8 +14,8 @@ interface HostFrameProps {
  */
 const HostFrame: React.FC<HostFrameProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-200 p-0 sm:p-8">
-      <div className="max-w-[720px] mx-auto bg-white shadow-2xl rounded-none sm:rounded-lg overflow-hidden flex flex-col" style={{ height: '100vh' }}>
+    <div className="h-screen overflow-hidden bg-gray-200 p-0 sm:p-8">
+      <div className="h-full max-w-[720px] mx-auto bg-white shadow-2xl rounded-none sm:rounded-lg overflow-hidden flex flex-col">
         <BrowserChrome />
         <Header />
         <YellowDivider />

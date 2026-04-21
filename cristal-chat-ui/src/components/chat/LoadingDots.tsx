@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from '../ui/Avatar';
 
 interface LoadingDotsProps {
   text?: string;
@@ -10,25 +11,24 @@ interface LoadingDotsProps {
  * Usado enquanto o assistente está processando uma resposta
  */
 const LoadingDots: React.FC<LoadingDotsProps> = ({
-  text = 'Consultando o portal...',
+  text = 'Consultando o portal',
   className = ''
 }) => {
   return (
     <div
-      className={`flex flex-col items-start gap-2 py-4 ${className}`}
+      className={`flex gap-3 mb-[22px] max-w-[880px] mx-auto ${className}`}
       role="status"
       aria-label="Carregando resposta"
     >
-      <div className="flex items-center gap-1">
-        <span className="w-2 h-2 rounded-full bg-primary-blue animate-pulse-dot" style={{ animationDelay: '0s' }} />
-        <span className="w-2 h-2 rounded-full bg-primary-blue animate-pulse-dot" style={{ animationDelay: '0.2s' }} />
-        <span className="w-2 h-2 rounded-full bg-primary-blue animate-pulse-dot" style={{ animationDelay: '0.4s' }} />
-      </div>
-      {text && (
-        <span className="text-sm text-text-secondary">
-          {text}
+      <Avatar type="assistant" />
+      <div className="flex items-center gap-2.5" style={{ fontSize: '14.5px', color: 'var(--ink-500)' }}>
+        <span>{text}</span>
+        <span className="inline-flex gap-1">
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse-dot" style={{ backgroundColor: 'var(--ink-300)', animationDelay: '0s' }} />
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse-dot" style={{ backgroundColor: 'var(--ink-300)', animationDelay: '0.15s' }} />
+          <span className="w-1.5 h-1.5 rounded-full animate-pulse-dot" style={{ backgroundColor: 'var(--ink-300)', animationDelay: '0.3s' }} />
         </span>
-      )}
+      </div>
     </div>
   );
 };

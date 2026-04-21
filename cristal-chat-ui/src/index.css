@@ -8,32 +8,36 @@
 @layer base {
   html, body {
     height: 100%;
+    overflow: hidden; /* Previne scroll externo */
   }
 
   body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: var(--text-main);
-    background-color: var(--chat-bg);
+    text-rendering: optimizeLegibility;
+    color: var(--ink-900);
+    background-color: var(--paper);
     margin: 0;
     padding: 0;
   }
 
   #root {
     height: 100%;
+    overflow: hidden; /* Previne scroll externo */
   }
 }
 
 /* Custom scrollbar global */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #D3D1C7 transparent;
+  scrollbar-color: var(--line-2) transparent;
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -41,16 +45,24 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #D3D1C7;
-  border-radius: 4px;
+  background: var(--line-2);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #B5B3A8;
+  background: var(--ink-300);
+  background-clip: padding-box;
+  border: 2px solid transparent;
 }
 
-/* Custom scrollbar utility class */
+/* Custom utilities */
 @layer utilities {
+  .rounded-pill {
+    border-radius: 9999px;
+  }
+
   .scrollbar-custom::-webkit-scrollbar {
     width: 8px;
   }

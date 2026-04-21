@@ -32,11 +32,17 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   }, [messages, isLoading]);
 
   return (
-    <div className={`flex-1 overflow-y-auto bg-chat-bg p-3 sm:p-4 scroll-smooth ${className}`}>
+    <div
+      className={`flex-1 overflow-y-auto scroll-smooth ${className}`}
+      style={{
+        backgroundColor: 'var(--paper)',
+        padding: '22px 24px 28px',
+      }}
+    >
       {children || (
         <>
           {messages.length === 0 ? (
-            <WelcomeCard onSuggestionClick={onSuggestionClick || (() => {})} />
+            <WelcomeCard onSuggestionClick={onSuggestionClick || (() => {})} className="animate-fade-up" />
           ) : (
             <>
               {messages.map((message) => (
@@ -44,6 +50,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
                   key={message.id}
                   message={message}
                   citations={message.role === 'assistant' ? citations : undefined}
+                  className="animate-fade-up"
                 />
               ))}
               <div ref={chatEndRef} />
